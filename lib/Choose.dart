@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'FractionPracticePage.dart';
+
 class LearningPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFE6F0FF),
       appBar: AppBar(
-        title: Text('小猴天天练',style: TextStyle(color: Color(0xFFa6fff2)),),
+        title: Text('小猴天天练', style: TextStyle(color: Color(0xFFa6fff2))),
         backgroundColor: Color(0xFF5e63b6),
       ),
       body: SingleChildScrollView(
@@ -18,6 +19,8 @@ class LearningPage extends StatelessWidget {
               _buildCalendarSection(),
               SizedBox(height: 20),
               _buildDailyTaskSection(context),
+              SizedBox(height: 20),
+              _buildImageSection(), // New layout section
               SizedBox(height: 20),
               _buildRewardSection(),
               SizedBox(height: 20),
@@ -129,12 +132,58 @@ class LearningPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.lightBlueAccent),
-                child: Text('继续练习',style: TextStyle(color: Color(0XFFebfffa)),),
+                child: Text('继续练习', style: TextStyle(color: Color(0XFFebfffa))),
               ),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildImageSection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        _buildImageCard(
+          icon: Icons.close,
+          title: '收集错题',
+          subtitle: '智能错题本',
+          backgroundColor: Colors.lightBlueAccent,
+        ),
+        _buildImageCard(
+          icon: Icons.auto_fix_high,
+          title: '错题练习',
+          subtitle: '快速查缺补漏',
+          backgroundColor: Colors.purpleAccent,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildImageCard({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required Color backgroundColor,
+  }) {
+    return Container(
+      width: 150,
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: backgroundColor.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 40, color: Colors.white),
+          SizedBox(height: 10),
+          Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          SizedBox(height: 5),
+          Text(subtitle, style: TextStyle(fontSize: 14, color: Colors.black54)),
+        ],
+      ),
     );
   }
 
